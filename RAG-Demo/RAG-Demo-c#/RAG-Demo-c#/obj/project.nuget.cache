@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "dgSpecHash": "NP1FFYyiziE=",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\POC's\\RAG-Demo-C#\\RAG-Demo\\RAG-Demo-c#\\RAG-Demo-c#\\RAG-Demo-c#.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\azure.ai.openai\\2.1.0\\azure.ai.openai.2.1.0.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\azure.core\\1.51.1\\azure.core.1.51.1.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\10.0.2\\microsoft.bcl.asyncinterfaces.10.0.2.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.3\\microsoft.extensions.configuration.10.0.3.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.3\\microsoft.extensions.configuration.abstractions.10.0.3.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\10.0.3\\microsoft.extensions.configuration.fileextensions.10.0.3.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.configuration.json\\10.0.3\\microsoft.extensions.configuration.json.10.0.3.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.2\\microsoft.extensions.dependencyinjection.abstractions.10.0.2.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\10.0.2\\microsoft.extensions.diagnostics.abstractions.10.0.2.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\10.0.3\\microsoft.extensions.fileproviders.abstractions.10.0.3.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\10.0.3\\microsoft.extensions.fileproviders.physical.10.0.3.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\10.0.3\\microsoft.extensions.filesystemglobbing.10.0.3.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\10.0.2\\microsoft.extensions.hosting.abstractions.10.0.2.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.2\\microsoft.extensions.logging.abstractions.10.0.2.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.options\\10.0.2\\microsoft.extensions.options.10.0.2.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.primitives\\10.0.3\\microsoft.extensions.primitives.10.0.3.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\openai\\2.1.0\\openai.2.1.0.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\system.clientmodel\\1.9.0\\system.clientmodel.1.9.0.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\system.memory.data\\10.0.1\\system.memory.data.10.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
