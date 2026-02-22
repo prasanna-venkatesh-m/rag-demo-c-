@@ -127,19 +127,29 @@ namespace AzureRAGDemo
             // 4️⃣ GPT RESPONSE
             // ==============================
             var messages = new List<ChatMessage>
-    {
-        new UserChatMessage(prompt)
-    };
+            {
+                new UserChatMessage(prompt)
+            };
 
-            var chatResponse = await chatClient.CompleteChatAsync(messages,
+            Console.WriteLine("\nResponse:\n");
+
+            var streamingResponse = chatClient.CompleteChatStreamingAsync(
+                messages,
                 new ChatCompletionOptions
                 {
                     Temperature = 0.3f,
                     MaxOutputTokenCount = 800
                 });
 
-            Console.WriteLine("\nResponse:\n");
-            Console.WriteLine(chatResponse.Value.Content[0].Text);
+            await foreach (StreamingChatCompletionUpdate update in streamingResponse)
+            {
+                foreach (ChatMessageContentPart contentPart in update.ContentUpdate)
+                {
+                    Console.Write(contentPart.Text);
+                }
+            }
+
+            Console.WriteLine();
 
             // ==============================
             // 5️⃣ PRINT CITATIONS
