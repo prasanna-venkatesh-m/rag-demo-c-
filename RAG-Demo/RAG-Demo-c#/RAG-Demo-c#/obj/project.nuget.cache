@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "NP1FFYyiziE=",
+  "dgSpecHash": "4T+wmdqcyas=",
   "success": true,
   "projectFilePath": "D:\\Projects\\POC's\\RAG-Demo-C#\\RAG-Demo\\RAG-Demo-c#\\RAG-Demo-c#\\RAG-Demo-c#.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\azure.ai.openai\\2.1.0\\azure.ai.openai.2.1.0.nupkg.sha512",
     "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\azure.core\\1.51.1\\azure.core.1.51.1.nupkg.sha512",
+    "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\azure.search.documents\\11.7.0\\azure.search.documents.11.7.0.nupkg.sha512",
     "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\10.0.2\\microsoft.bcl.asyncinterfaces.10.0.2.nupkg.sha512",
     "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.3\\microsoft.extensions.configuration.10.0.3.nupkg.sha512",
     "C:\\Users\\PrasannaVenkateshM\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.3\\microsoft.extensions.configuration.abstractions.10.0.3.nupkg.sha512",

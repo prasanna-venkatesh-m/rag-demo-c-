@@ -10,6 +10,7 @@
         "dependencies": {
           "Azure.AI.OpenAI": "2.1.0",
           "Azure.Core": "1.51.1",
+          "Azure.Search.Documents": "11.7.0",
           "Microsoft.Extensions.Configuration": "10.0.3",
           "Microsoft.Extensions.Configuration.FileExtensions": "10.0.3",
           "Microsoft.Extensions.Configuration.Json": "10.0.3"
@@ -40,6 +41,17 @@
           "lib/net10.0/Azure.Core.dll": {
             "assemblyVersion": "1.51.1.0",
             "fileVersion": "1.5100.126.10405"
+          }
+        }
+      },
+      "Azure.Search.Documents/11.7.0": {
+        "dependencies": {
+          "Azure.Core": "1.51.1"
+        },
+        "runtime": {
+          "lib/net8.0/Azure.Search.Documents.dll": {
+            "assemblyVersion": "11.7.0.0",
+            "fileVersion": "11.700.25.50904"
           }
         }
       },
@@ -255,6 +267,13 @@
       "sha512": "sha512-JRANrRvN5O5FFRh+pMUb8qqWU7jBQ39qXEbVr7Rkb1/s7rqc6RSzVHKGBz5Ro1gDy2WSGjG5YEOJKpPIBiCMcA==",
       "path": "azure.core/1.51.1",
       "hashPath": "azure.core.1.51.1.nupkg.sha512"
+    },
+    "Azure.Search.Documents/11.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-48yBLnsf8SSgowe/OQDCNg9+G9WjzRmLX6Bghjlshxu+5Mhh4maTXvSWKi4o568ZqV6GoOYhiKPbCm/QYoufwA==",
+      "path": "azure.search.documents/11.7.0",
+      "hashPath": "azure.search.documents.11.7.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/10.0.2": {
       "type": "package",

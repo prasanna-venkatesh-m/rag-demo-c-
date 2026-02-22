@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[1.51.1, )"
             },
+            "Azure.Search.Documents": {
+              "target": "Package",
+              "version": "[11.7.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[10.0.3, )"

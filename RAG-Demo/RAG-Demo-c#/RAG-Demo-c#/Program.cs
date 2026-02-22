@@ -1,7 +1,12 @@
 ﻿using Azure;
 using Azure.AI.OpenAI;
+using Azure.Search.Documents;
+using Azure.Search.Documents.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic.FileIO;
 using OpenAI.Chat;
+using System.Text;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,53 +18,142 @@ namespace AzureRAGDemo
     {
         static async Task Main(string[] args)
         {
-            // Build configuration
             var configuration = new ConfigurationBuilder()
-            .AddJsonFile(Path.Combine(AppContext.BaseDirectory, "appsettings.json"), optional: false, reloadOnChange: true)
-            .Build();
+                .AddJsonFile("appsettings.json")
+                .Build();
 
-            // Load Azure Search settings
-            var searchService = configuration["AzureSearch:ServiceUrl"];
-            var indexName = configuration["AzureSearch:IndexName"];
-            var searchApiVersion = configuration["AzureSearch:ApiVersion"];
-            var searchKey = configuration["AzureSearch:ApiKey"];
+            // ==============================
+            // AZURE SEARCH SETTINGS
+            // ==============================
+            string searchService = configuration["AzureSearch:ServiceUrl"];
+            string indexName = configuration["AzureSearch:IndexName"];
+            string searchKey = configuration["AzureSearch:ApiKey"];
 
-            // Load Azure OpenAI settings
-            var openAiEndpoint = configuration["AzureOpenAI:Endpoint"];
-            var embeddingDeployment = configuration["AzureOpenAI:EmbeddingDeployment"];
-            var chatDeployment = configuration["AzureOpenAI:ChatDeployment"];
-            var openAiKey = configuration["AzureOpenAI:ApiKey"];
+            // ==============================
+            // AZURE OPENAI SETTINGS
+            // ==============================
+            string openAiEndpoint = configuration["AzureOpenAI:Endpoint"];
+            string embeddingDeployment = configuration["AzureOpenAI:EmbeddingDeployment"];
+            string chatDeployment = configuration["AzureOpenAI:ChatDeployment"];
+            string openAiKey = configuration["AzureOpenAI:ApiKey"];
 
             // Create Azure OpenAI client
             AzureOpenAIClient azureClient = new AzureOpenAIClient(
                 new Uri(openAiEndpoint),
-                new Azure.AzureKeyCredential(openAiKey)
+                new AzureKeyCredential(openAiKey)
             );
 
-            ChatClient chatClient = azureClient.GetChatClient(chatDeployment);
+            var embeddingClient = azureClient.GetEmbeddingClient(embeddingDeployment);
+            var chatClient = azureClient.GetChatClient(chatDeployment);
 
-            var requestOptions = new ChatCompletionOptions()
+            Console.WriteLine("Enter your question:");
+            string query = Console.ReadLine();
+
+            // ==============================
+            // 1️⃣ CREATE EMBEDDING
+            // ==============================
+            var embeddingResponse = await embeddingClient.GenerateEmbeddingAsync(query);
+            var queryVector = embeddingResponse.Value.ToFloats().ToArray();
+
+            // ==============================
+            // 2️⃣ VECTOR SEARCH
+            // ==============================
+
+            var searchClient = new SearchClient(
+                new Uri(searchService),
+                indexName,
+                new AzureKeyCredential(searchKey)
+            );
+
+            var vectorQuery = new VectorizedQuery(queryVector)
             {
-                MaxOutputTokenCount = 100,
-                Temperature = 1.0f,
-                TopP = 1.0f,
+                KNearestNeighborsCount = 3,
+                Fields = { "text_vector" }
             };
 
-            List<ChatMessage> messages = new List<ChatMessage>()
+            var searchOptions = new SearchOptions
             {
-                new SystemChatMessage("You are a helpful assistant."),
-                new UserChatMessage("I am going to Paris, what should I see?"),
+                Size = 3,
             };
 
-            var response = chatClient.CompleteChatStreaming(messages, requestOptions);
-            foreach (StreamingChatCompletionUpdate update in response)
+            searchOptions.VectorSearch = new VectorSearchOptions();
+            searchOptions.VectorSearch.Queries.Add(vectorQuery);
+
+            var response = await searchClient.SearchAsync<SearchDocument>(
+                searchText: null,
+                searchOptions
+            );
+
+            List<string> documents = new List<string>();
+            List<(string Title, string ParentId)> citations = new();
+
+            await foreach (SearchResult<SearchDocument> result in response.Value.GetResultsAsync())
             {
-                foreach (ChatMessageContentPart updatePart in update.ContentUpdate)
+                var doc = result.Document;
+
+                if (doc.ContainsKey("chunk"))
+                    documents.Add(doc["chunk"]?.ToString());
+
+                citations.Add((
+                    doc.ContainsKey("title") ? doc["title"]?.ToString() : "No Title",
+                    doc.ContainsKey("parent_id") ? doc["parent_id"]?.ToString() : ""
+                ));
+            }
+
+            string contextText = documents.Count > 0
+                ? string.Join("\n\n", documents)
+                : "No documents found.";
+
+            // ==============================
+            // 3️⃣ BUILD PROMPT
+            // ==============================
+            string prompt = $@"
+            You are a helpful computer troubleshooting assistant.
+
+            Using ONLY the DOCUMENTS provided below, answer the user's question clearly and step-by-step.
+            Do NOT copy documents verbatim.
+
+            If the answer cannot be found in the documents, respond exactly with:
+            ""Please contact agent.""
+
+            DOCUMENTS:
+            {contextText}
+
+            USER QUESTION:
+            {query}
+            ";
+
+            // ==============================
+            // 4️⃣ GPT RESPONSE
+            // ==============================
+            var messages = new List<ChatMessage>
+    {
+        new UserChatMessage(prompt)
+    };
+
+            var chatResponse = await chatClient.CompleteChatAsync(messages,
+                new ChatCompletionOptions
                 {
-                    Console.Write(updatePart.Text);
+                    Temperature = 0.3f,
+                    MaxOutputTokenCount = 800
+                });
+
+            Console.WriteLine("\nResponse:\n");
+            Console.WriteLine(chatResponse.Value.Content[0].Text);
+
+            // ==============================
+            // 5️⃣ PRINT CITATIONS
+            // ==============================
+            if (citations.Count > 0)
+            {
+                Console.WriteLine("\nCitations:");
+                foreach (var c in citations)
+                {
+                    Console.WriteLine($"Title: {c.Title}");
+                    Console.WriteLine($"Parent ID: {c.ParentId}");
+                    Console.WriteLine();
                 }
             }
-            Console.WriteLine();
         }
     }
 }

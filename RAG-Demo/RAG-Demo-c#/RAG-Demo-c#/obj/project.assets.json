@@ -37,6 +37,22 @@
           }
         }
       },
+      "Azure.Search.Documents/11.7.0": {
+        "type": "package",
+        "dependencies": {
+          "Azure.Core": "1.49.0"
+        },
+        "compile": {
+          "lib/net8.0/Azure.Search.Documents.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Azure.Search.Documents.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/10.0.2": {
         "type": "package",
         "compile": {
@@ -396,6 +412,24 @@
         "lib/net8.0/Azure.Core.xml",
         "lib/netstandard2.0/Azure.Core.dll",
         "lib/netstandard2.0/Azure.Core.xml"
+      ]
+    },
+    "Azure.Search.Documents/11.7.0": {
+      "sha512": "48yBLnsf8SSgowe/OQDCNg9+G9WjzRmLX6Bghjlshxu+5Mhh4maTXvSWKi4o568ZqV6GoOYhiKPbCm/QYoufwA==",
+      "type": "package",
+      "path": "azure.search.documents/11.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "README.md",
+        "azure.search.documents.11.7.0.nupkg.sha512",
+        "azure.search.documents.nuspec",
+        "azureicon.png",
+        "lib/net8.0/Azure.Search.Documents.dll",
+        "lib/net8.0/Azure.Search.Documents.xml",
+        "lib/netstandard2.0/Azure.Search.Documents.dll",
+        "lib/netstandard2.0/Azure.Search.Documents.xml"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/10.0.2": {
@@ -938,6 +972,7 @@
     "net10.0": [
       "Azure.AI.OpenAI >= 2.1.0",
       "Azure.Core >= 1.51.1",
+      "Azure.Search.Documents >= 11.7.0",
       "Microsoft.Extensions.Configuration >= 10.0.3",
       "Microsoft.Extensions.Configuration.FileExtensions >= 10.0.3",
       "Microsoft.Extensions.Configuration.Json >= 10.0.3"
@@ -1000,6 +1035,10 @@
           "Azure.Core": {
             "target": "Package",
             "version": "[1.51.1, )"
+          },
+          "Azure.Search.Documents": {
+            "target": "Package",
+            "version": "[11.7.0, )"
           },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",

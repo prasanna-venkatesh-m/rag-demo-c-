@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RAG-Demo-c#")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a0cdf04ae50c96743b50341576260d7ba90bb13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71e84fc6002e4aa6b252fc6a93f5d4e36a2b3841")]
 [assembly: System.Reflection.AssemblyProductAttribute("RAG-Demo-c#")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RAG-Demo-c#")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
